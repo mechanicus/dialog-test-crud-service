@@ -8,6 +8,11 @@ import cats.implicits._
 import org.apache.commons.codec.binary.Hex
 
 
+// Здесь собраны все классы общей для всех сервисов бэкенда модели.
+
+/** Универсальный идентификатор любой сущности в БД.
+  * SHA-256 выбран в силу крайне низкой вероятности коллизий
+  * и вероятности подбора методом перебора значений */
 @SerialVersionUID(1L)
 final case class SHA256(bytes: Array[Byte])
 
@@ -29,6 +34,8 @@ object SHA256 {
 
 
 
+/** Спец тип для имени пользователя. Допускаются только буквенно-числовые
+  * имена длиннее двух символов */
 @SerialVersionUID(1L)
 final case class Nickname(value: String)
 
@@ -45,6 +52,7 @@ object Nickname {
 
 
 
+/** Спец тип для непустой строки. Например тело сообщения или имя чата */
 @SerialVersionUID(1L)
 final case class NonEmptyString(value: String)
 
@@ -59,6 +67,7 @@ object NonEmptyString {
 
 
 
+/** Кроссплатформенное имя файла */
 @SerialVersionUID(1L)
 final case class Filename(value: String)
 
@@ -74,18 +83,22 @@ object Filename {
 
 
 
+/** Сущность пользователя мессенджера */
 @SerialVersionUID(1L)
 final case class User (
   userId: UserId,
   nickname: Nickname
 )
 
+/** Сессия клиента. Позволяет идентифицировать один отдельный сеанс работы
+  * конкретного пользовательского клиента с бэкендом */
 @SerialVersionUID(1L)
 final case class Session (
   sessionId: SessionId,
   userId: UserId
 )
 
+/** Любое сообщение, созданное пользователем */
 @SerialVersionUID(1L)
 final case class Message (
   messageId: MessageId,
@@ -94,6 +107,7 @@ final case class Message (
   createdOn: LocalDateTime
 )
 
+/** Любой файл, созданный пользователем */
 @SerialVersionUID(1L)
 final case class File (
   fileId: FileId,
@@ -102,6 +116,7 @@ final case class File (
   uploadedOn: LocalDateTime
 )
 
+/** Сообщение, отправленное отдельному пользователю (личное сообщение) */
 @SerialVersionUID(1L)
 final case class PersonalMessage (
   receiverId: UserId,
@@ -110,6 +125,7 @@ final case class PersonalMessage (
   sentOn: LocalDateTime
 )
 
+/** Файл, отправленный отдельному пользователю */
 @SerialVersionUID(1L)
 final case class PersonalFile (
   receiverId: UserId,
@@ -118,18 +134,21 @@ final case class PersonalFile (
   sentOn: LocalDateTime
 )
 
+/** Сущность чата */
 @SerialVersionUID(1L)
 final case class Chat (
   chatId: ChatId,
   title: NonEmptyString
 )
 
+/** Пользователь чата */
 @SerialVersionUID(1L)
 final case class ChatMember (
   chatId: ChatId,
   userId: UserId
 )
 
+/** Сообщение, отправленное в чат */
 @SerialVersionUID(1L)
 final case class ChatMessage (
   chatId: ChatId,
@@ -138,6 +157,7 @@ final case class ChatMessage (
   sentOn: LocalDateTime
 )
 
+/** Файл, отправленный в чат */
 @SerialVersionUID(1L)
 final case class ChatFile (
   chatId: ChatId,

@@ -3,6 +3,7 @@ package im.dig.trial.messenger.services.model
 import cats.implicits._
 import scala.util.control.NonFatal
 
+/** Класс типов, экземпляры которых можно создать на основе строки */
 trait Read[A] {
   def read(string: String): A
   def readOption(string: String): Option[A] = try {

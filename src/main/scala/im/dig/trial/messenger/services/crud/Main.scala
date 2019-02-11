@@ -18,6 +18,8 @@ object Main {
     system.actorOf(Props(classOf[CrudService], db, ec), "crud-service")
   }
 
+  // подготавливаем схему БД к работе
+  // создаем схему и таблицы, если они еще не существуют
   private def prepareDatabase()(implicit db: Database, ec: ExecutionContext): Unit = {
     val execution = db.run {
       DBIO.seq(

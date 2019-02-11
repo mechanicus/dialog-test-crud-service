@@ -4,6 +4,8 @@ import java.time.LocalDateTime
 
 import im.dig.trial.messenger.services.model._
 
+// здесь собраны все сообщения, которые остальные микросервисы
+// отправляют CRUD-сервису
 
 sealed abstract class CrudServiceMessage
 sealed abstract class UserAction extends CrudServiceMessage
@@ -122,12 +124,6 @@ final case class GetPersonalMessageHistory(
   limit: Int
 ) extends PersonalMessageAction
 
-//@SerialVersionUID(1L)
-//final case class FindUserMessages(
-//  userId: UserId,
-//  from: LocalDateTime
-//) extends PersonalMessageAction
-
 
 
 @SerialVersionUID(1L)
@@ -151,12 +147,6 @@ final case class GetPersonalFileHistory(
   to: LocalDateTime,
   limit: Int
 ) extends PersonalFileAction
-
-//@SerialVersionUID(1L)
-//final case class FindUserFiles(
-//  userId: UserId,
-//  from: LocalDateTime
-//) extends PersonalFileAction
 
 
 

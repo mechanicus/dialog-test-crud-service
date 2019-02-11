@@ -8,6 +8,9 @@ import im.dig.trial.messenger.services.messages._
 
 import scala.concurrent.ExecutionContext
 
+/** CRUD-сервис представляет собой актор кластера, к которому
+  * обращаются остальные микросервисы посредством отправки сообщений,
+  * объявленных в пакете messages */
 final class CrudService(
   private implicit val db: Database,
   private implicit val ec: ExecutionContext
